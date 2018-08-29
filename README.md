@@ -26,5 +26,5 @@ PyTorch Codes for our Topic-Aware Convolutional Model for Extreme Summarization 
 
 The test set output of the models described in the paper can be found [here]().
 
-## Looking for pretrained model?
+## Looking for pretrained models?
 
