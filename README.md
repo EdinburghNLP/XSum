@@ -13,7 +13,7 @@ Please cite this paper if you use our code or data.
 
 # Looking for XSum dataset
 
-Instructions to download and preprocess the extreme summarization dataset are [here]().
+Instructions to download and preprocess the extreme summarization dataset are [here](https://github.com/shashiongithub/XSum-Dataset).
 
 
 This repository releases our data for extreme summarization and code for topic-aware convolutional model for abstractive summarization. 
