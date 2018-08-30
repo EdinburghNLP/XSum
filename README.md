@@ -17,14 +17,16 @@ Instructions to download and preprocess the extreme summarization dataset are [h
 
 ## Looking for Topic-Aware Convolutional Model for Extreme Summarization?
 
-PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is [here]().
+PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is here (coming soon).
 
-## Looking for a Running Demo of Our Model?
+## Looking for a Running Demo of Our System?
 
+A running demo of of our abstractive system can be found here (coming soon).
 
 ## Looking for XSum: test set outputs?
 
-The test set output of the models described in the paper can be found [here]().
+The test set output of the models described in the paper can be found here (coming soon).
 
 ## Looking for pretrained models?
 
+Our pretrained models described in the paper can be found here (coming soon).
