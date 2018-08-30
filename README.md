@@ -21,7 +21,7 @@ PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization i
 
 ## Looking for a Running Demo of Our System?
 
-A running demo of of our abstractive system can be found here (coming soon).
+A running demo of our abstractive system can be found here (coming soon).
 
 ## Looking for XSum: test set outputs?
 
