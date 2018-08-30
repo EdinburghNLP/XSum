@@ -17,7 +17,7 @@ Instructions to download and preprocess the extreme summarization dataset are [h
 
 ## Looking for Topic-Aware Convolutional Model for Extreme Summarization?
 
-PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is here (coming soon).
+PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is [here](https://github.com/shashiongithub/XSum-Topic-ConvS2S).
 
 ## Looking for a Running Demo of Our System?
 
