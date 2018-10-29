@@ -17,9 +17,9 @@ Please cite this paper if you use our code or data.
 
 **XSum-WebArxiveUrls.txt:** The XSum dataset consists of **226,711** Wayback archived BBC articles ranging over almost a decade (2010 to 2017) and covering a wide variety of domains (e.g., News, Politics, Sports, Weather, Business, Technology, Science, Health, Family, Education, Entertainment and Arts). 
 
-**download-bbc-articles.py:** Use this script to download BBC articles (html files) from the Wayback Machine.
+**scripts/download-bbc-articles.py:** Use this script to download BBC articles (html files) from the Wayback Machine.
 
-**parse-bbc-html-data.py:** Use this script to extract text from BBC html files.
+**scripts/parse-bbc-html-data.py:** Use this script to extract text from BBC html files.
 
 **XSum-WebArxiveUrls-BBCids.txt:** Each article comes with a unique identifier in its URL.
 
@@ -45,7 +45,7 @@ sudo apt-get install libxml2-dev libxslt-dev
 
 ### Download URLs
 ```
-python download-bbc-articles.py [--timestamp_exactness 14]
+python scripts/download-bbc-articles.py [--timestamp_exactness 14]
 ```
 This will download BBC news articles (html files) from the Wayback Machine. The script could fail to download some URLs (Wayback Machine servers temporarily down). Please **run this script multiple times** to ensure that you have downloaded the whole dataset. Each time you run this script, it stores the missing URLs that should be downloaded in the next turn.
 
@@ -53,7 +53,7 @@ This will download BBC news articles (html files) from the Wayback Machine. The 
 
 ### Extract Text from HTML files
 ```
-python parse-bbc-html-data.py
+python scripts/parse-bbc-html-data.py
 ```
 This will extract text (url, body, summary) from html files. 
 
