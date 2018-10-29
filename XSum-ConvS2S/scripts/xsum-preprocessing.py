@@ -10,12 +10,12 @@ END_TOKENS = ['.', '!', '?', '...', "'", "`", '"', dm_single_close_quote, dm_dou
 # SENTENCE_START = '<s>'
 # SENTENCE_END = '</s>'
 
-bbc_tokenized_stories_dir = "/address/to/xsum-preprocessed"
+bbc_tokenized_stories_dir = "../XSum-Dataset/xsum-preprocessed"
 
-finished_files_dir = "/address/to/data-dir/data"
+finished_files_dir = "./data"
 
 # Load JSON File : training, dev and test splits.
-with open("/address/to/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
+with open("../XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
   train_dev_test_dict = json.load(json_data)
 
 def read_text_file(text_file):
@@ -90,3 +90,4 @@ if __name__ == '__main__':
   write_to_bin("test", os.path.join(finished_files_dir, "test.document"), os.path.join(finished_files_dir, "test.summary"))
   write_to_bin("validation", os.path.join(finished_files_dir, "validation.document"), os.path.join(finished_files_dir, "validation.summary"))
   write_to_bin("train", os.path.join(finished_files_dir, "train.document"), os.path.join(finished_files_dir, "train.summary"))
+	
