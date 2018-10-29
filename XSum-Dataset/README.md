@@ -51,25 +51,47 @@ This will download BBC news articles (html files) from the Wayback Machine. The 
 
 [Sep 19, 2018]: Each URL includes a timestamp (14 letters; year, month, date, hour, minute and second, e.g., 20130206080312) showing when it was stored. By default, it is set to 14 letters. You can lower this to improve your chances to download a BBC article. For example, with timestamp_exactness=4 the time stamp will be chopped to first 4 letters (i.e., 2013) and it will try to download a version of the article stored in 2013 (any month, date, hour, minute or second). Every time you rerun the download script, lower the timestamp_exactness (>= 1) to improve the chances of getting missed URLs from the previous step. However, lower the timestamp_exactness value, more time it will take to retrieve the article.
 
+This will create a directory called "xsum-raw-downloads" with downloaded html files.
+
 ### Extract Text from HTML files
 ```
 python scripts/parse-bbc-html-data.py
 ```
-This will extract text (url, body, summary) from html files. 
+This will extract text (url, body, summary) from html files. It will create a directory called "xsum-extracts-from-downloads" with extracted data (*bbcid.data*) files.
 
 ### Deactivate Virtual Environment
 ```deactivate```
 
-## Postprocessing: Sentence Segmentation, Tokenization and Final preparation
+## Postprocessing: Sentence Segmentation, Tokenization, Lemmatization and Final preparation
 
-We used Stanford CoreNLP toolkit to preprocess (segment and tokenize) the extracted dataset. Finally, we used  *XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json* to partition the extracted datset into training, development and test sets. We generated following files: 
+### Stanford CoreNLP toolkit 
+
+We use the Stanford CoreNLP toolkit to preprocess (segment, tokenize and lemmatize) the extracted files in "xsum-extracts-from-downloads." 
+
+Create a file *stanford-inputlist.txt* which lists extracted data files in "xsum-extracts-from-downloads." For example, it will have entries like:
 ```
-train.document and train.summary
-validation.document and validation.summary
-test.document and test.summary
+xsum-extracts-from-downloads/2333890.data
+xsum-extracts-from-downloads/3245891.data
+and so on.
 ```
 
-Lines in *document* and *summary* files are paired for input documents and corresponding output summaries. The input document is truncated to 400 tokens and the length of the summary limited to 90 tokens. Both *document* and *summary* files are lowercased. 
+Now, run the Stanford CoreNLP toolkit:
+```
+cd tools/stanford-corenlp-full-2015-12-09
+./corenlp.sh -annotators tokenize,ssplit,pos,lemma -ssplit.newlineIsSentenceBreak always -filelist stanford-inputlist.txt -outputFormat xml -outputDirectory StanfordOutput
+```
+
+The directory "StanfordOutput" will have CoreNLP optput files in the XML format. 
+
+### Extracting data from CoreNLP XML files
+
+```
+python3 scripts/process-corenlp-xml-data.py
+```
+
+Processes files in "StanfordOutput" and creates a directory "xsum-preprocessed" with three subfolders "document", "document-lemma" and "summary".
+
+* "document-lemma" files are used to train LDA models. 
 
 
 Please contact shashi.narayan@ed.ac.uk if you have any problem downloading and preprocessing this dataset.
