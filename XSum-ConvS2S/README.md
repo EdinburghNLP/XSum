@@ -33,7 +33,7 @@ python setup.py develop
 ### Data Preprocessing
 
 ```
-python xsum-preprocessing.py
+python scripts/xsum-preprocessing.py
 ```
 
 We partition the extracted datset into training, development and test sets. We generate following files: 
