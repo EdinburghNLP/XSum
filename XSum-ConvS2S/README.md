@@ -32,6 +32,20 @@ python setup.py develop
 
 ### Data Preprocessing
 
+```
+python xsum-preprocessing.py
+```
+
+We partition the extracted datset into training, development and test sets. We generate following files: 
+``` 
+train.document and train.summary
+validation.document and validation.summary
+test.document and test.summary
+```
+
+Lines in *document* and *summary* files are paired for input documents and corresponding output summaries. The input document is truncated to 400 tokens and the length of the summary limited to 90 tokens. Both *document* and *summary* files are lowercased. 
+
+
 [Optional]: Required if you want to work with the binary format data.
 
 ```
