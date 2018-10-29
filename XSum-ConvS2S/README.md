@@ -45,12 +45,9 @@ test.document and test.summary
 
 Lines in *document* and *summary* files are paired for input documents and corresponding output summaries. The input document is truncated to 400 tokens and the length of the summary limited to 90 tokens. Both *document* and *summary* files are lowercased. 
 
-
-[Optional]: Required if you want to work with the binary format data.
-
 ```
-TEXT=/address/to/the/directory/with/train/validation/test/(document,summary)/files
-python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir /address/to/the/output/directory/data-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
+TEXT=./data
+python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
 ```
 
 This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. 
@@ -58,16 +55,16 @@ This will create binarized data that will be used for model training. It also ge
 ### Training
 
 ```
-CUDA_VISIBLE_DEVICES=1 python train.py /address/to/the/output/directory/data-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir /address/to/the/output/directory/where/model/checkpoints/are/saved --no-progress-bar --log-interval 10
+CUDA_VISIBLE_DEVICES=1 python train.py ./data-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints --no-progress-bar --log-interval 10
 ```
 
 ## Generation with Pre-trained Models
 
 ```
-CUDA_VISIBLE_DEVICES=1 python generate.py /address/to/the/directory/with/test/(document,summary)/files/to/decode --path /address/to/the/output/directory/with/model/checkpoints/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-checkpoint-best.pt
+CUDA_VISIBLE_DEVICES=1 python generate.py ./data --path ./checkpoints/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-checkpoint-best.pt
 ```
 
-Make sure that /address/to/the/directory/with/test/(document,summary)/files/to/decode also has source and target dictionary files.
+Make sure that ./data also has source and target dictionary files.
 
 By default, the code will use all available GPUs on your machine. We have used CUDA_VISIBLE_DEVICES environment variable to select specific GPU(s).
 
