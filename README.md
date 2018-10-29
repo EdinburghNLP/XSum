@@ -13,7 +13,7 @@ Please cite this paper if you use our code or data.
 
 ## Looking for Extreme Summarization (XSum) dataset?
 
-Instructions to **download** and **preprocess** the extreme summarization dataset are [here](https://github.com/shashiongithub/XSum-Dataset).
+Instructions to **download** and **preprocess** the extreme summarization dataset are [here](./XSum-Dataset).
 
 ## Looking for Convolutional Model for Extreme Summarization?
 
