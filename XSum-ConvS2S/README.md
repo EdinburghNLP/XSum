@@ -36,7 +36,7 @@ python setup.py develop
 python scripts/xsum-preprocessing.py
 ```
 
-We partition the extracted datset into training, development and test sets. We generate following files: 
+We partition the extracted datset into training, development and test sets. We generate following files in the "data" directory: 
 ``` 
 train.document and train.summary
 validation.document and validation.summary
