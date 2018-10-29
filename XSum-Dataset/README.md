@@ -81,7 +81,7 @@ cd tools/stanford-corenlp-full-2015-12-09
 ./corenlp.sh -annotators tokenize,ssplit,pos,lemma -ssplit.newlineIsSentenceBreak always -filelist stanford-inputlist.txt -outputFormat xml -outputDirectory StanfordOutput
 ```
 
-The directory "StanfordOutput" will have CoreNLP optput files in the XML format. 
+The directory "StanfordOutput" will have CoreNLP output files in the XML format. 
 
 ### Extracting data from CoreNLP XML files
 
