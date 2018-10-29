@@ -31,6 +31,3 @@ A running demo of our abstractive system can be found here (coming soon).
 
 The test set output of the models described in the paper can be found here (coming soon).
 
-## Looking for pretrained models?
-
-Our pretrained models described in the paper can be found here (coming soon).
