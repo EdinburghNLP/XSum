@@ -17,6 +17,10 @@ Please cite this paper if you use our code or data.
 
 Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
+## Looking for a Running Demo of Our System?
+
+A running demo of our abstractive system can be found here (coming soon).
+
 ## Pretrained models and Test Predictions (Narayan et al., EMNLP 2018)
 
 * [Pretrained ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-convs2s.tar.gz) (1.1GB)
@@ -123,8 +127,5 @@ python scripts/extract-hypothesis-fairseq.py -o test-output-convs2s-checkpoint-b
 python scripts/extract-hypothesis-fairseq.py -o test-output-topic-convs2s-checkpoint-best.pt -f final-test-output-topic-convs2s-checkpoint-best.pt
 ```
 
-## Looking for a Running Demo of Our System?
-
-A running demo of our abstractive system can be found here (coming soon).
 
 
