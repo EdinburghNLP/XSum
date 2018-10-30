@@ -19,9 +19,9 @@ Please cite the following paper if you use this code.
 
 ## Installation
 
-Our copy of FairSeq code requires PyTorch version >= 0.4.0. Please follow the instructions here: https://github.com/pytorch/pytorch#installation.
+Our code requires PyTorch version >= 0.4.0. Please follow the instructions here: https://github.com/pytorch/pytorch#installation.
 
-After PyTorch is installed, you can install ConvS2S with:
+After PyTorch is installed, you can install Topic-ConvS2S with:
 ```
 pip install -r requirements.txt
 python setup.py build
@@ -43,28 +43,28 @@ validation.document, validation.summary, validation.document-lemma and validatio
 test.document, test.summary, test.document-lemma and test.doc-topics
 ```
 
-Lines in document, summary, document-lemma and doc-topics files are paired for input documents, output summaries, input lemmatized documents and their document topic vectors. The input documents are truncated to 400 tokens and the length of the summaries limited to 90 tokens. Both document and summary files are lowercased.
+Lines in document, summary, document-lemma and doc-topics files are paired for input documents, output summaries, input lemmatized documents and their document topic vectors. The input documents are truncated to 400 tokens and the length of the summaries limited to 90 tokens. Document, document-lemma and summary files are lowercased.
 
 ```
-TEXT=/address/to/the/directory/with/train/validation/test/(document,summary)/files
-python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir /address/to/the/output/directory/data-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
+TEXT=./data-topic-convs2s
+python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-topic-convs2s --joined-dictionary --nwordstgt 50000 --nwordssrc 50000 --output-format raw
 ```
 
-This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. 
+This will generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. It operates on the raw format data.
 
 ### Training
 
 ```
-CUDA_VISIBLE_DEVICES=1 python train.py /address/to/the/output/directory/data-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir /address/to/the/output/directory/where/model/checkpoints/are/saved --no-progress-bar --log-interval 10
+CUDA_VISIBLE_DEVICES=1 python train.py ./data-topic-convs2s --source-lang document --target-lang summary --doctopics doc-topics --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-topic-convs2s --no-progress-bar --log-interval 10
 ```
 
 ## Generation with Pre-trained Models
 
 ```
-CUDA_VISIBLE_DEVICES=1 python generate.py /address/to/the/directory/with/test/(document,summary)/files/to/decode --path /address/to/the/output/directory/with/model/checkpoints/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-checkpoint-best.pt
+CUDA_VISIBLE_DEVICES=1 python generate.py ./data-topic-convs2s --path ./checkpoints-topic-convs2s/checkpoint_best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary --doctopics doc-topics --encoder-embed-dim 512 > test-output-topic-convs2s-checkpoint-best.pt 
 ```
 
-Make sure that /address/to/the/directory/with/test/(document,summary)/files/to/decode also has source and target dictionary files.
+Make sure that ./data-topic-convs2s has test files to decode, source and target dictionary files.
 
 By default, the code will use all available GPUs on your machine. We have used CUDA_VISIBLE_DEVICES environment variable to select specific GPU(s).
 
@@ -74,6 +74,6 @@ By default, the code will use all available GPUs on your machine. We have used C
 python extract-hypothesis-fairseq.py -o test-output-checkpoint-best.pt -f final-test-output-checkpoint-best.pt
 ```
 
-## Pre-trained ConvS2S Model (from Narayan et al., EMNLP 2018)
+## Pre-trained Topic-ConvS2S Model (from Narayan et al., EMNLP 2018)
 
-Pretrained ConvS2S model and dictionary files used for decoding:  
+Pretrained Topic-ConvS2S model and dictionary files used for decoding:  
