@@ -10,12 +10,12 @@ END_TOKENS = ['.', '!', '?', '...', "'", "`", '"', dm_single_close_quote, dm_dou
 # SENTENCE_START = '<s>'
 # SENTENCE_END = '</s>'
 
-bbc_tokenized_stories_dir = "../XSum-Dataset/xsum-preprocessed"
+bbc_tokenized_stories_dir = "./XSum-Dataset/xsum-preprocessed"
 
 finished_files_dir = "./data-convs2s"
 
 # Load JSON File : training, dev and test splits.
-with open("../XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
+with open("./XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
   train_dev_test_dict = json.load(json_data)
 
 def read_text_file(text_file):
