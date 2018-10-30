@@ -107,13 +107,27 @@ python scripts/lda-gensim-training-document-lemma.py 512 1000 > lda-train.log 2>
 
 We train 512 topics with 1000 iterations over the training set. "lda-train.log" prints learned topics with their 30 most frequent words.
 
-### Predicting Topics for Each Document
+This script will generate a directory called "lda-train-document-lemma-topic-512-iter-1000".
 
+### Predicting Topics for Each Document in the Corpus
 
+```
+python scripts/lda-gensim-decoding-document-lemma.py 512 1000
+```
 
+It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a directory "xsum-preprocessed/document-lemma-topic-512-iter-1000" predicting topics for each document.
 
+### Predicting Topics for Each Word in the Corpus
 
+```
+python scripts/lda-gensim-decoding-wordtopicdist.py 512 1000 > ./lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log
+```
 
+It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a file "lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log" redicting topics for each word.
+
+### Pretrained LDA Models
+
+In case you have problems training LDA models, you can download them here: Coming soon.
 
 
 Please contact shashi.narayan@ed.ac.uk if you have any problem downloading and preprocessing this dataset.
