@@ -33,7 +33,7 @@ python setup.py develop
 ### Data Preprocessing
 
 ```
-python scripts/xsum-preprocessing.py
+python scripts/xsum-preprocessing-convs2s.py
 ```
 
 We partition the extracted datset into training, development and test sets. We generate following files in the "data" directory: 
@@ -46,8 +46,8 @@ test.document and test.summary
 Lines in *document* and *summary* files are paired for input documents and corresponding output summaries. The input document is truncated to 400 tokens and the length of the summary limited to 90 tokens. Both *document* and *summary* files are lowercased. 
 
 ```
-TEXT=./data
-python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
+TEXT=./data-convs2s
+python preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-convs2s-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
 ```
 
 This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. 
@@ -55,23 +55,23 @@ This will create binarized data that will be used for model training. It also ge
 ### Training
 
 ```
-CUDA_VISIBLE_DEVICES=1 python train.py ./data-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints --no-progress-bar --log-interval 10
+CUDA_VISIBLE_DEVICES=1 python train.py ./data-convs2s-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-convs2s --no-progress-bar --log-interval 10
 ```
 
 ## Generation with Pre-trained Models
 
 ```
-CUDA_VISIBLE_DEVICES=1 python generate.py ./data --path ./checkpoints/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-checkpoint-best.pt
+CUDA_VISIBLE_DEVICES=1 python generate.py ./data-convs2s --path ./checkpoints-convs2s/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-convs2s-checkpoint-best.pt
 ```
 
-Make sure that ./data also has source and target dictionary files.
+Make sure that ./data-convs2s also has source and target dictionary files.
 
 By default, the code will use all available GPUs on your machine. We have used CUDA_VISIBLE_DEVICES environment variable to select specific GPU(s).
 
 ### Extract final hypothesis
 
 ```
-python extract-hypothesis-fairseq.py -o test-output-checkpoint-best.pt -f final-test-output-checkpoint-best.pt
+python extract-hypothesis-fairseq.py -o test-output-convs2s-checkpoint-best.pt -f final-test-output-convs2s-checkpoint-best.pt
 ```
 
 ## Pre-trained ConvS2S Model (from Narayan et al., EMNLP 2018)
