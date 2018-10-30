@@ -127,7 +127,7 @@ It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and cre
 
 ### Pretrained LDA Models
 
-In case you have problems training LDA models, you can download them here: Coming soon.
+In case you have problems training LDA models, you can download them [here](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-lda-pretrained.tar.gz) (200MB).
 
 
 Please contact shashi.narayan@ed.ac.uk if you have any problem downloading and preprocessing this dataset.
