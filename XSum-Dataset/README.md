@@ -93,6 +93,28 @@ Processes files in "StanfordOutput" and creates a directory "xsum-preprocessed" 
 
 * "document-lemma" files are used to train LDA models. 
 
+## LDA Topic Modeling
+
+This part is only used for Topic-ConvS2S models.
+
+We use the gensim's parallelized Latent Dirichlet Allocation [ldamulticore](https://radimrehurek.com/gensim/models/ldamulticore.html) to learn topics over the XSum training ("xsum-preprocessed/document-lemma") data.
+
+### Training LDA Models from Scratch
+
+```
+python scripts/lda-gensim-training-document-lemma.py 512 1000 > lda-train.log 2> lda-train.log.2
+```
+
+We train 512 topics with 1000 iterations over the training set. "lda-train.log" prints learned topics with their 30 most frequent words.
+
+### Predicting Topics for Each Document
+
+
+
+
+
+
+
 
 Please contact shashi.narayan@ed.ac.uk if you have any problem downloading and preprocessing this dataset.
 
