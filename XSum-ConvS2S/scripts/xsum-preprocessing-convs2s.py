@@ -12,7 +12,7 @@ END_TOKENS = ['.', '!', '?', '...', "'", "`", '"', dm_single_close_quote, dm_dou
 
 bbc_tokenized_stories_dir = "../XSum-Dataset/xsum-preprocessed"
 
-finished_files_dir = "./data"
+finished_files_dir = "./data-convs2s"
 
 # Load JSON File : training, dev and test splits.
 with open("../XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
