@@ -6,15 +6,15 @@ dm_single_close_quote = u'\u2019' # unicode
 dm_double_close_quote = u'\u201d'
 END_TOKENS = ['.', '!', '?', '...', "'", "`", '"', dm_single_close_quote, dm_double_close_quote, ")"] # acceptable ways to end a sentence
 
-bbc_tokenized_stories_dir = "../XSum-Dataset/xsum-preprocessed"
+bbc_tokenized_stories_dir = "./XSum-Dataset/xsum-preprocessed"
 
 finished_files_dir = "./data-topic-convs2s"
 
 # Load JSON File : training, dev and test splits.
-with open("../XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
+with open("./XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json") as json_data:
   train_dev_test_dict = json.load(json_data)
 
-lda_word_topics = "../XSum-Dataset/lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log"
+lda_word_topics = "./XSum-Dataset/lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log"
   
 def read_text_file(text_file):
   lines = []
