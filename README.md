@@ -1,3 +1,5 @@
+# Extreme Summarization
+
 This repository contains data and code for the EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@ed.ac.uk for any question.
 
 Please cite this paper if you use our code or data.
@@ -11,13 +13,83 @@ Please cite this paper if you use our code or data.
 }
 ```
 
-## Looking for Extreme Summarization (XSum) dataset?
+## Extreme Summarization (XSum) dataset
 
 Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
-## Looking for Convolutional Model for Extreme Summarization?
+## Topic-Aware Convolutional Model for Extreme Summarization
 
-PyTorch code for the Convolutional Model for Extreme Summarization is [here](./XSum-ConvS2S).
+We release PyTorch code for our Topic-ConvS2S model from the EMNLP 2018 paper. Our code builds on an earlier copy of [Facebook AI Research Sequence-to-Sequence Toolkit](https://github.com/pytorch/fairseq). 
+
+We also release the code for the [ConvS2S model](https://arxiv.org/abs/1705.03122). It uses optimized hyperparameters for extreme summarization. Our release facilitates the replication of our experiments, such as training from scratch or predicting with released pretrained models, as reported in the paper.
+
+### Installation
+Our code requires PyTorch version >= 0.4.0. Please follow the instructions here: https://github.com/pytorch/pytorch#installation.
+
+After PyTorch is installed, you can install ConvS2S and Topic-ConvS2S with:
+```
+# Install ConvS2S
+cd ./XSum-ConvS2S
+pip install -r requirements.txt
+python setup.py build
+python setup.py develop
+
+# Install Topic-ConvS2S
+cd ../XSum-Topic-ConvS2S
+pip install -r requirements.txt
+python setup.py build
+python setup.py develop
+```
+
+### Training a New Model
+
+#### Data Preprocessing
+
+We partition the extracted datset into training, development and test sets. The input document is truncated to 400 tokens and the length of the summary limited to 90 tokens. Both *document* and *summary* files are lowercased.
+
+##### ConvS2S
+```
+python scripts/xsum-preprocessing-convs2s.py
+```
+It generates following files in the "data-convs2s" directory: 
+``` 
+train.document and train.summary
+validation.document and validation.summary
+test.document and test.summary
+```
+Lines in *document* and *summary* files are paired for input documents and corresponding output summaries.  
+```
+TEXT=./data-convs2s
+python XSum-ConvS2S/preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-convs2s-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
+```
+This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. 
+
+##### Topic-ConvS2S
+```
+python scripts/xsum-preprocessing-topic-convs2s.py
+````
+It generates following files in the "data-topic-convs2s" directory:
+```
+train.document, train.summary, train.document-lemma and train.doc-topics
+validation.document, validation.summary, validation.document-lemma and validation.doc-topics
+test.document, test.summary, test.document-lemma and test.doc-topics
+```
+Lines in document, summary, document-lemma and doc-topics files are paired for input documents, output summaries, input lemmatized documents and their document topic vectors.
+```
+TEXT=./data-topic-convs2s
+python XSum-Topic-ConvS2S/preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-topic-convs2s --joined-dictionary --nwordstgt 50000 --nwordssrc 50000 --output-format raw
+```
+This will generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. It operates on the raw format data.
+
+
+
+### Training
+
+```
+CUDA_VISIBLE_DEVICES=1 python train.py ./data-convs2s-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-convs2s --no-progress-bar --log-interval 10
+```
+
+
 
 ## Looking for Topic-Aware Convolutional Model for Extreme Summarization?
 
