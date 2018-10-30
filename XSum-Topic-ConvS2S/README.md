@@ -71,7 +71,7 @@ By default, the code will use all available GPUs on your machine. We have used C
 ### Extract final hypothesis
 
 ```
-python extract-hypothesis-fairseq.py -o test-output-checkpoint-best.pt -f final-test-output-checkpoint-best.pt
+python extract-hypothesis-fairseq.py -o test-output-topic-convs2s-checkpoint-best.pt -f final-test-output-topic-convs2s-checkpoint-best.pt
 ```
 
 ## Pre-trained Topic-ConvS2S Model (from Narayan et al., EMNLP 2018)
