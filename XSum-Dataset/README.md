@@ -123,7 +123,7 @@ It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and cre
 python scripts/lda-gensim-decoding-wordtopicdist.py 512 1000 > ./lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log
 ```
 
-It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a file "lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log" redicting topics for each word.
+It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a file "lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log" predicting topics for each word.
 
 ### Pretrained LDA Models
 
