@@ -13,15 +13,15 @@ Please cite this paper if you use our code or data.
 
 ## Looking for Extreme Summarization (XSum) dataset?
 
-Instructions to **download** and **preprocess** the extreme summarization dataset are [here](./XSum-Dataset).
+Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
 ## Looking for Convolutional Model for Extreme Summarization?
 
-**PyTorch code** for the **Convolutional Model** for Extreme Summarization is [here](./XSum-ConvS2S).
+PyTorch code for the Convolutional Model for Extreme Summarization is [here](./XSum-ConvS2S).
 
 ## Looking for Topic-Aware Convolutional Model for Extreme Summarization?
 
-**PyTorch code** for **our Topic-Aware Convolutional Model** for Extreme Summarization is [here](./XSum-Topic-ConvS2S).
+PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is [here](./XSum-Topic-ConvS2S).
 
 ## Looking for a Running Demo of Our System?
 
