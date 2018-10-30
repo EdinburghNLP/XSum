@@ -17,18 +17,13 @@ Please cite this paper if you use our code or data.
 
 Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
-## Pretrained models and Test Predictions
+## Pretrained models and Test Predictions (Narayan et al., EMNLP 2018)
 
-Pre-trained ConvS2S Model (from Narayan et al., EMNLP 2018)
-
-Pretrained ConvS2S model and dictionary files used for decoding:  
-
-
-Pre-trained Topic-ConvS2S Model (from Narayan et al., EMNLP 2018)
-
-Pretrained Topic-ConvS2S model and dictionary files used for decoding:  
-
-
+* [Pretrained ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-convs2s.tar.gz) (1.1GB)
+* [Pretrained Topic-ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-topic-convs2s.tar.gz) (1.2GB)
+* [Pretrained Gensim LDA model](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-lda-pretrained.tar.gz) (200MB)
+* Our model Predictions
+* Human Evaluation Data
 
 ## Topic-Aware Convolutional Model for Extreme Summarization
 
