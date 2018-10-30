@@ -17,6 +17,19 @@ Please cite this paper if you use our code or data.
 
 Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
+## Pretrained models and Test Predictions
+
+Pre-trained ConvS2S Model (from Narayan et al., EMNLP 2018)
+
+Pretrained ConvS2S model and dictionary files used for decoding:  
+
+
+Pre-trained Topic-ConvS2S Model (from Narayan et al., EMNLP 2018)
+
+Pretrained Topic-ConvS2S model and dictionary files used for decoding:  
+
+
+
 ## Topic-Aware Convolutional Model for Extreme Summarization
 
 We release PyTorch code for our Topic-ConvS2S model from the EMNLP 2018 paper. Our code builds on an earlier copy of [Facebook AI Research Sequence-to-Sequence Toolkit](https://github.com/pytorch/fairseq). 
@@ -81,25 +94,45 @@ python XSum-Topic-ConvS2S/preprocess.py --source-lang document --target-lang sum
 ```
 This will generates source and target dictionary files. In this case, both are same ("--joined-dictionary") and with 50000 tokens. It operates on the raw format data.
 
+#### Model Training
 
+By default, the code will use all available GPUs on your machine. We have used CUDA_VISIBLE_DEVICES environment variable to select specific GPU(s).
 
-### Training
-
+##### ConvS2S
 ```
-CUDA_VISIBLE_DEVICES=1 python train.py ./data-convs2s-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-convs2s --no-progress-bar --log-interval 10
+CUDA_VISIBLE_DEVICES=1 python XSum-ConvS2S/train.py ./data-convs2s-bin --source-lang document --target-lang summary --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-convs2s --no-progress-bar --log-interval 10
+```
+
+##### Topic-ConvS2S
+```
+CUDA_VISIBLE_DEVICES=1 python XSum-Topic-ConvS2S/train.py ./data-topic-convs2s --source-lang document --target-lang summary --doctopics doc-topics --max-sentences 32 --arch fconv --criterion label_smoothed_cross_entropy --max-epoch 200 --clip-norm 0.1 --lr 0.10 --dropout 0.2 --save-dir ./checkpoints-topic-convs2s --no-progress-bar --log-interval 10
+```
+
+### Generation with Pre-trained Models
+
+#### ConvS2S
+```
+CUDA_VISIBLE_DEVICES=1 python XSum-ConvS2S/generate.py ./data-convs2s --path ./checkpoints-convs2s/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-convs2s-checkpoint-best.pt
+```
+Make sure that ./data-convs2s also has source and target dictionary files.
+
+#### Topic-ConvS2S
+```
+CUDA_VISIBLE_DEVICES=1 python XSum-Topic-ConvS2S/generate.py ./data-topic-convs2s --path ./checkpoints-topic-convs2s/checkpoint_best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary --doctopics doc-topics --encoder-embed-dim 512 > test-output-topic-convs2s-checkpoint-best.pt 
+```
+Make sure that ./data-topic-convs2s has test files to decode, source and target dictionary files.
+
+### Extract final hypothesis
+```
+python scripts/extract-hypothesis-fairseq.py -o test-output-convs2s-checkpoint-best.pt -f final-test-output-convs2s-checkpoint-best.pt
+python scripts/extract-hypothesis-fairseq.py -o test-output-topic-convs2s-checkpoint-best.pt -f final-test-output-topic-convs2s-checkpoint-best.pt
 ```
 
 
 
-## Looking for Topic-Aware Convolutional Model for Extreme Summarization?
-
-PyTorch code for our Topic-Aware Convolutional Model for Extreme Summarization is [here](./XSum-Topic-ConvS2S).
 
 ## Looking for a Running Demo of Our System?
 
 A running demo of our abstractive system can be found here (coming soon).
 
-## Looking for XSum: test set outputs?
-
-The test set output of the models described in the paper can be found here (coming soon).
 
