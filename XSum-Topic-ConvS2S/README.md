@@ -32,7 +32,18 @@ python setup.py develop
 
 ### Data Preprocessing
 
-[Optional]: Required if you want to work with the binary format data.
+```
+python scripts/xsum-preprocessing-topic-convs2s.py
+````
+We partition the extracted datset into training, development and test sets. We generate following files in the "data-topic-convs2s" directory:
+
+```
+train.document, train.summary, train.document-lemma and train.doc-topics
+validation.document, validation.summary, validation.document-lemma and validation.doc-topics
+test.document, test.summary, test.document-lemma and test.doc-topics
+```
+
+Lines in document, summary, document-lemma and doc-topics files are paired for input documents, output summaries, input lemmatized documents and their document topic vectors. The input documents are truncated to 400 tokens and the length of the summaries limited to 90 tokens. Both document and summary files are lowercased.
 
 ```
 TEXT=/address/to/the/directory/with/train/validation/test/(document,summary)/files
