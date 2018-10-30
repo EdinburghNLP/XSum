@@ -32,7 +32,7 @@ Pretrained Topic-ConvS2S model and dictionary files used for decoding:
 
 ## Topic-Aware Convolutional Model for Extreme Summarization
 
-We release PyTorch code for our Topic-ConvS2S model from the EMNLP 2018 paper. Our code builds on an earlier copy of [Facebook AI Research Sequence-to-Sequence Toolkit](https://github.com/pytorch/fairseq). 
+This repository contains PyTorch code for our Topic-ConvS2S model from the EMNLP 2018 paper. Our code builds on an earlier copy of [Facebook AI Research Sequence-to-Sequence Toolkit](https://github.com/pytorch/fairseq). 
 
 We also release the code for the [ConvS2S model](https://arxiv.org/abs/1705.03122). It uses optimized hyperparameters for extreme summarization. Our release facilitates the replication of our experiments, such as training from scratch or predicting with released pretrained models, as reported in the paper.
 
@@ -127,9 +127,6 @@ Make sure that ./data-topic-convs2s has test files to decode, source and target 
 python scripts/extract-hypothesis-fairseq.py -o test-output-convs2s-checkpoint-best.pt -f final-test-output-convs2s-checkpoint-best.pt
 python scripts/extract-hypothesis-fairseq.py -o test-output-topic-convs2s-checkpoint-best.pt -f final-test-output-topic-convs2s-checkpoint-best.pt
 ```
-
-
-
 
 ## Looking for a Running Demo of Our System?
 
