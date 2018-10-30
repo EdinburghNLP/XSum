@@ -23,7 +23,7 @@ Instructions to download and preprocess the extreme summarization dataset are [h
 * [Pretrained Topic-ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-topic-convs2s.tar.gz) (1.2GB)
 * [Pretrained Gensim LDA model](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-lda-pretrained.tar.gz) (200MB)
 * Our model Predictions
-* [Human Evaluation Data](xsum-human-evaluation-data.txt)
+* [Human Evaluation Data](xsum-human-evaluation-data.tar.gz)
 
 ## Topic-Aware Convolutional Model for Extreme Summarization
 
