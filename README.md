@@ -26,7 +26,7 @@ A running demo of our abstractive system can be found here (coming soon).
 * [Pretrained ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-convs2s.tar.gz) (1.1GB)
 * [Pretrained Topic-ConvS2S model and dictionary files](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-topic-convs2s.tar.gz) (1.2GB)
 * [Pretrained Gensim LDA model](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-lda-pretrained.tar.gz) (200MB)
-* Our model Predictions
+* Our [model Predictions](xsum-model-predictions.tar.gz)
 * [Human Evaluation Data](xsum-human-evaluation-data.tar.gz)
 
 ## Topic-Aware Convolutional Model for Extreme Summarization
