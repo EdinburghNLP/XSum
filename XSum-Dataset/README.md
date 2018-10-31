@@ -1,6 +1,6 @@
 # Extreme Summarization (XSum) Dataset
 
-This repository contains download and preprocessing instructions for the data from the EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@ed.ac.uk for any question.
+This repository contains download and preprocessing instructions for the **XSum** dataset described in our EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@ed.ac.uk for any question.
 
 Please cite this paper if you use our code or data.
 ```
@@ -84,12 +84,10 @@ cd tools/stanford-corenlp-full-2015-12-09
 The directory "StanfordOutput" will have CoreNLP output files in the XML format. 
 
 ### Extracting data from CoreNLP XML files
-
 ```
 python3 scripts/process-corenlp-xml-data.py
 ```
-
-Processes files in "StanfordOutput" and creates a directory "xsum-preprocessed" with three subfolders "document", "document-lemma" and "summary".
+It processes files in "StanfordOutput" and creates a directory "xsum-preprocessed" with three subfolders "document", "document-lemma" and "summary".
 
 * "document-lemma" files are used to train LDA models. 
 
@@ -100,33 +98,26 @@ This part is only used for Topic-ConvS2S models.
 We use the gensim's parallelized Latent Dirichlet Allocation [ldamulticore](https://radimrehurek.com/gensim/models/ldamulticore.html) to learn topics over the XSum training ("xsum-preprocessed/document-lemma") data.
 
 ### Training LDA Models from Scratch
-
 ```
 python scripts/lda-gensim-training-document-lemma.py 512 1000 > lda-train.log 2> lda-train.log.2
 ```
-
 We train 512 topics with 1000 iterations over the training set. "lda-train.log" prints learned topics with their 30 most frequent words.
 
 This script will generate a directory called "lda-train-document-lemma-topic-512-iter-1000".
 
 ### Predicting Topics for Each Document in the Corpus
-
 ```
 python scripts/lda-gensim-decoding-document-lemma.py 512 1000
 ```
-
 It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a directory "xsum-preprocessed/document-lemma-topic-512-iter-1000" predicting topics for each document.
 
 ### Predicting Topics for Each Word in the Corpus
-
 ```
 python scripts/lda-gensim-decoding-wordtopicdist.py 512 1000 > ./lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log
 ```
-
 It will use LDA models in "lda-train-document-lemma-topic-512-iter-1000" and create a file "lda-train-document-lemma-topic-512-iter-1000/word_term_topics.log" predicting topics for each word.
 
 ### Pretrained LDA Models
-
 In case you have problems training LDA models, you can download them [here](http://kinloch.inf.ed.ac.uk/public/XSUM-EMNLP18-lda-pretrained.tar.gz) (200MB).
 
 
