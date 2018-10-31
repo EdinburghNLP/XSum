@@ -74,7 +74,7 @@ Lines in *document* and *summary* files are paired as (input document, correspon
 TEXT=./data-convs2s
 python XSum-ConvS2S/preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-convs2s-bin --joined-dictionary --nwordstgt 50000 --nwordssrc 50000
 ```
-This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both are same (due to "--joined-dictionary") and with 50000 tokens. 
+This will create binarized data that will be used for model training. It also generates source and target dictionary files. In this case, both files are identical (due to "--joined-dictionary") and have 50000 tokens. 
 
 ##### Topic-ConvS2S
 ```
@@ -91,7 +91,7 @@ Lines in document, summary, document-lemma and doc-topics files are paired as (i
 TEXT=./data-topic-convs2s
 python XSum-Topic-ConvS2S/preprocess.py --source-lang document --target-lang summary --trainpref $TEXT/train --validpref $TEXT/validation --testpref $TEXT/test --destdir ./data-topic-convs2s --joined-dictionary --nwordstgt 50000 --nwordssrc 50000 --output-format raw
 ```
-This will generates source and target dictionary files. In this case, both are same (due to "--joined-dictionary") and with 50000 tokens. It operates on the raw format data.
+This will generate source and target dictionary files. In this case, both files are identical (due to "--joined-dictionary") and have 50000 tokens. It operates on the raw format data.
 
 #### Model Training
 
@@ -113,13 +113,13 @@ CUDA_VISIBLE_DEVICES=1 python XSum-Topic-ConvS2S/train.py ./data-topic-convs2s -
 ```
 CUDA_VISIBLE_DEVICES=1 python XSum-ConvS2S/generate.py ./data-convs2s --path ./checkpoints-convs2s/checkpoint-best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary > test-output-convs2s-checkpoint-best.pt
 ```
-Make sure that ./data-convs2s also has source and target dictionary files.
+Make sure that ./data-convs2s also has the source and target dictionary files.
 
 #### Topic-ConvS2S
 ```
 CUDA_VISIBLE_DEVICES=1 python XSum-Topic-ConvS2S/generate.py ./data-topic-convs2s --path ./checkpoints-topic-convs2s/checkpoint_best.pt --batch-size 1 --beam 10 --replace-unk --source-lang document --target-lang summary --doctopics doc-topics --encoder-embed-dim 512 > test-output-topic-convs2s-checkpoint-best.pt 
 ```
-Make sure that ./data-topic-convs2s has test files to decode, source and target dictionary files.
+Make sure that ./data-topic-convs2s has the test files to decode, the source and target dictionary files.
 
 ### Extract final hypothesis
 ```
