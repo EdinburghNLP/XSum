@@ -19,7 +19,7 @@ Instructions to download and preprocess the extreme summarization dataset are [h
 
 ## Looking for a Running Demo of Our System?
 
-A running demo of our abstractive system can be found here (**coming soon**).
+A running demo of our abstractive system can be found [here](http://cohort.inf.ed.ac.uk/xsum.html).
 
 ## Pretrained models and Test Predictions (Narayan et al., EMNLP 2018)
 
