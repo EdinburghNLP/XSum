@@ -132,6 +132,8 @@ def DownloadUrl(url, downloads_dir, timestamp_exactness, max_attempts=5, timeout
       pass
     except socket.timeout:
       pass
+    except requests.exceptions.TooManyRedirects:
+      pass
 
     # Exponential back-off.
     time.sleep(math.pow(2, attempts))
