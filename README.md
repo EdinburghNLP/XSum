@@ -36,7 +36,7 @@ This repository contains PyTorch code for our Topic-ConvS2S model. Our code buil
 We also release the code for the [ConvS2S model](https://arxiv.org/abs/1705.03122). It uses optimized hyperparameters for extreme summarization. Our release facilitates the replication of our experiments, such as training from scratch or predicting with released pretrained models, as reported in the paper.
 
 ### Installation
-Our code requires PyTorch version >= 0.4.0. Please follow the instructions here: https://github.com/pytorch/pytorch#installation.
+Our code requires PyTorch version 0.4.0 or 0.4.1. Please follow the instructions here: https://github.com/pytorch/pytorch#installation.
 
 After PyTorch is installed, you can install ConvS2S and Topic-ConvS2S:
 ```
