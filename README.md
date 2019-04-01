@@ -1,6 +1,6 @@
 # Extreme Summarization
 
-This repository contains data and code for our EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@ed.ac.uk for any question.
+This repository contains data and code for our EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@gmail.com for any question.
 
 Please cite this paper if you use our code or data.
 ```
