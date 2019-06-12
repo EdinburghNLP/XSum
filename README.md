@@ -15,6 +15,8 @@ Please cite this paper if you use our code or data.
 
 ## Extreme Summarization (XSum) dataset
 
+**You can always build the dataset using the instructions below. The original dataset is also available upon request.**
+
 Instructions to download and preprocess the extreme summarization dataset are [here](./XSum-Dataset).
 
 ## Looking for a Running Demo of Our System?
