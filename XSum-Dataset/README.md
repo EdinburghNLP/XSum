@@ -1,5 +1,6 @@
 # Extreme Summarization (XSum) Dataset
 
+**You can always build the dataset using the instructions below. The original dataset is also available upon request.**
 
 This repository contains download and preprocessing instructions for the **XSum** dataset described in our EMNLP 2018 paper "[Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://arxiv.org/abs/1808.08745)". Please contact me at shashi.narayan@ed.ac.uk for any question.
 
@@ -15,8 +16,6 @@ Please cite this paper if you use our code or data.
 ```
 
 ## What builds the XSum dataset?
-
-**You can always build the dataset using the instructions below. The dataset is also available upon request.**
 
 **XSum-WebArxiveUrls.txt:** The XSum dataset consists of **226,711** Wayback archived BBC articles ranging over almost a decade (2010 to 2017) and covering a wide variety of domains (e.g., News, Politics, Sports, Weather, Business, Technology, Science, Health, Family, Education, Entertainment and Arts). 
 
