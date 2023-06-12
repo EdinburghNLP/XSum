@@ -166,10 +166,10 @@ def get_download_file_name(url):
   return htmlfileid
 
 if __name__ == "__main__":
-  download_dir = "./xsum-raw-downloads"
+  download_dir = "./xsum-raw-downloads-filtered"
   map_webarxiv_bbcid_file = "XSum-WebArxiveUrls-BBCids.txt"
   
-  result_dir = "./xsum-extracts-from-downloads"
+  result_dir = "./xsum-extracts-from-downloads-filtered"
   os.system("mkdir -p "+result_dir)
   failed_id_file = open("xsum-extracts-from-downloads-failedIds.txt", "w")
 

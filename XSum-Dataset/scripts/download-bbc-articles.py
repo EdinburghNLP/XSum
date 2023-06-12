@@ -170,7 +170,7 @@ def WriteUrls(filename, urls):
     f.writelines(url + '\n' for url in urls)
 
 
-def DownloadMode(urls_file, missing_urls_file, downloads_dir, request_parallelism, timestamp_exactness, choose_num=0):
+def DownloadMode(urls_file, missing_urls_file, downloads_dir, request_parallelism, timestamp_exactness):
   """Downloads the URLs for the specified corpus.
 
   Args:
@@ -182,8 +182,6 @@ def DownloadMode(urls_file, missing_urls_file, downloads_dir, request_parallelis
   urls_full = ReadUrls(urls_file)
   
   urls_valid_todownload = urls_full[:]
-  if choose_num > 0:
-    urls_valid_todownload = random.sample(urls_valid_todownload, choose_num)
 
   missing_urls_filename = missing_urls_file
   if False and os.path.exists(missing_urls_filename):
@@ -243,16 +241,15 @@ def main():
   parser.add_argument('--request_parallelism', type=int, default=200)
   parser.add_argument('--context_token_limit', type=int, default=2000)
   parser.add_argument('--timestamp_exactness', type=int, default=14)
-  parser.add_argument('--choose_num', type=int, default=0)
   args = parser.parse_args()
     
-  urls_file_to_download = "XSum-WebArxiveUrls.txt"
+  urls_file_to_download = "XSum-WebArxiveUrls_Filtered.txt"
   missing_urls_file = "XSum-WebArxiveUrls.missing.txt" 
-  downloads_dir = "./xsum-raw-downloads"
+  downloads_dir = "./xsum-raw-downloads-filtered"
   print('Creating the download directory.')
   os.system("mkdir -p "+downloads_dir)
   
-  DownloadMode(urls_file_to_download, missing_urls_file, downloads_dir, args.request_parallelism, args.timestamp_exactness, args.choose_num)
+  DownloadMode(urls_file_to_download, missing_urls_file, downloads_dir, args.request_parallelism, args.timestamp_exactness)
 
 
 
