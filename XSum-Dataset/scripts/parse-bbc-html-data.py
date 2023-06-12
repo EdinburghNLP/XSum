@@ -41,7 +41,10 @@ class ParseHtml:
   def __init__(self, story, corpus):
     self.story = story
     self.corpus = corpus
-    self.parser = html.HTMLParser(encoding=chardet.detect(self.story.html)['encoding'])
+    #print(chardet.detect(b'Hello')['encoding'])
+    #raise Exception()
+    #self.parser = html.HTMLParser(encoding=chardet.detect(self.story.html)['encoding'])
+    self.parser = html.HTMLParser(encoding='utf-8')
     self.tree = html.document_fromstring(self.story.html, parser=self.parser)
     
     # Elements to delete.
@@ -93,7 +96,8 @@ class ParseHtml:
     """
     xpaths = map(self.tree.xpath, selector)
     elements = list(chain.from_iterable(xpaths))
-    paragraphs = [e.text_content().encode('utf-8') for e in elements]
+    #paragraphs = [e.text_content().encode('utf-8') for e in elements]
+    paragraphs = [e.text_content() for e in elements]
     paragraphs = map(str.strip, paragraphs)
     paragraphs = [s for s in paragraphs if s and not str.isspace(s)]
     
@@ -174,7 +178,7 @@ if __name__ == "__main__":
   for line in open(map_webarxiv_bbcid_file).readlines():
     data = line.strip().split()
     bbcids_dict[data[1]] = data[0]
-  print len(bbcids_dict)
+  print(len(bbcids_dict))
 
   count = 0
 
@@ -210,7 +214,7 @@ if __name__ == "__main__":
     foutput.close()
 
     if count%1000 == 0:
-      print count
+      print(count)
     count += 1
       
   failed_id_file.close()
