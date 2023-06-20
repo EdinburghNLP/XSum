@@ -184,7 +184,7 @@ def DownloadMode(urls_file, missing_urls_file, downloads_dir, request_parallelis
   urls_valid_todownload = urls_full[:]
 
   missing_urls_filename = missing_urls_file
-  if False and os.path.exists(missing_urls_filename):
+  if os.path.exists(missing_urls_filename):
     print('Only downloading missing URLs')
     urls_valid_todownload = list(set(urls_full).intersection(ReadUrls(missing_urls_filename)))
 

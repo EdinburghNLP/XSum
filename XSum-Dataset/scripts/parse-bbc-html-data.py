@@ -22,6 +22,7 @@ from collections import namedtuple
 from lxml import html
 import cchardet as chardet
 from itertools import chain
+import glob
 
 RawStory = namedtuple('RawStory', 'url html')
 StoryTitle = namedtuple('StoryTitle', 'url title')
@@ -166,10 +167,10 @@ def get_download_file_name(url):
   return htmlfileid
 
 if __name__ == "__main__":
-  download_dir = "./xsum-raw-downloads-filtered"
+  suffix = "Filtered"
+  download_dir = f"./xsum-raw-downloads_{suffix}"
   map_webarxiv_bbcid_file = "XSum-WebArxiveUrls-BBCids.txt"
-  
-  result_dir = "./xsum-extracts-from-downloads-filtered"
+  result_dir = f"./xsum-extracts-from-downloads_{suffix}"
   os.system("mkdir -p "+result_dir)
   failed_id_file = open("xsum-extracts-from-downloads-failedIds.txt", "w")
 
@@ -178,12 +179,14 @@ if __name__ == "__main__":
   for line in open(map_webarxiv_bbcid_file).readlines():
     data = line.strip().split()
     bbcids_dict[data[1]] = data[0]
-  print(len(bbcids_dict))
+
+  bbcids = glob.glob(f'{download_dir}/*')
+  bbcids = [f.replace('.html','')[-8:] for f in bbcids]
 
   count = 0
-
+    
   # Process all downloads
-  for bbcid in bbcids_dict:
+  for bbcid in bbcids:
     
     if os.path.isfile(result_dir+"/"+bbcid+".data"):
       # Alread processed
