@@ -62,7 +62,8 @@ def get_data_from_urls(suffix):
                 if bbc_id not in data:
                     data[bbc_id] = {}
                     data[bbc_id]["annotations"] = []
-                data[bbc_id]["annotations"].append(annotation.split(",")[-2].strip())
+                annotation = annotation.split(",")[-2].strip()
+                data[bbc_id]["annotations"].append(1 if annotation == "yes" else 0)
     #print("annotations", json.dumps(data, indent=4))
 
     # get all files from dir
@@ -94,36 +95,8 @@ def main():
     # Run XSum-Dataset/scripts/download-bbc-articles.py --timestamp_exactness 14 
     # Make we have xsum-extracts-from-downloads_Filtered/Leftover
     get_data_from_urls('Filtered')
-    #get_data_from_urls('Leftover')
+    get_data_from_urls('Leftover')
     #print(filtered_urls)
-    '''
-    with open("./XSum-Dataset/chosen_urls.txt", "r") as f:
-        chosen_urls = f.readlines()
-        bbcids = [url.split("-")[-1].strip() for url in chosen_urls]
-        for i in range(len(bbcids)):
-            if len(bbcids[i]) > 8:
-                bbcids[i] = bbcids[i].split("/")[-1]
-
-    selected = {}
-    for category in ["factuality"]:#, "hallucination"]:
-        with open(f"./../xsum_hallucination_annotations/{category}_annotations_xsum_summaries.csv", "r") as f:
-            annotations = f.readlines()[1:]
-            for annotation in annotations:
-                bbcid = annotation.split(",")[0]
-                print(bbcid, type(bbcid), type(bbcids[0]))
-                if bbcid in bbcids:
-                    if bbcid not in selected:
-                        selected[bbcid] = []
-                    selected[bbcid].append(annotation.split(",")[-2].strip())
-    print(json.dumps(selected, indent=4))
-    with open(f"./../xsum_hallucination_annotations/{category}_annotations_xsum_summaries.csv", "w") as f:
-        f.write("bbc_id,annotation\n")
-        for bbcid in bbcids:
-            for annotation in annotations:
-                if bbcid in annotation:
-                    f.write(annotation)
-                    break 
-    '''
 
 if __name__ == "__main__":
     main()
