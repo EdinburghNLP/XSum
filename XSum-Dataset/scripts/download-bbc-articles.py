@@ -74,7 +74,7 @@ def DownloadMapper(t):
   # print url
   return url, DownloadUrl(url, downloads_dir, timestamp_exactness)
 
-def DownloadUrl(url, downloads_dir, timestamp_exactness, max_attempts=5, timeout=5): # Actually it was 5
+def DownloadUrl(url, downloads_dir, timestamp_exactness, max_attempts=5, timeout=10): # Actually it was 5
   """Downloads a URL.
 
   Args:
@@ -241,11 +241,12 @@ def main():
   parser.add_argument('--request_parallelism', type=int, default=200)
   parser.add_argument('--context_token_limit', type=int, default=2000)
   parser.add_argument('--timestamp_exactness', type=int, default=14)
+  parser.add_argument('--suffix', type=str, default="")
   args = parser.parse_args()
     
-  urls_file_to_download = "XSum-WebArxiveUrls_Filtered.txt"
-  missing_urls_file = "XSum-WebArxiveUrls.missing.txt" 
-  downloads_dir = "./xsum-raw-downloads-filtered"
+  urls_file_to_download = f"XSum-WebArxiveUrls{args.suffix}.txt"
+  missing_urls_file = f"XSum-WebArxiveUrls.missing{args.suffix}.txt" 
+  downloads_dir = f"./xsum-raw-downloads{args.suffix}"
   print('Creating the download directory.')
   os.system("mkdir -p "+downloads_dir)
   
